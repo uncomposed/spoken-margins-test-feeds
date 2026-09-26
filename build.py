@@ -101,7 +101,8 @@ def feed_xml(title, feed_url, episode_key, audio_url, guid, audio_path, is_perma
 
 
 def write(path, text):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    if os.path.dirname(path):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w") as f:
         f.write(text)
 
@@ -139,6 +140,88 @@ def main():
             f"{SHOW} (subscriber {name.upper()})",
             f"{BASE}/feeds/{token}/guid-is-link.rss", "ep3",
             guid_audio, guid_audio, "audio/ep3.m4a", is_permalink=True))
+
+    write("index.html", index_html())
+
+
+INDEX_CASES = [
+    ("Public control", "A normal public feed. Its links should survive sharing.", "public"),
+    ("Query token (Patreon style)", "The token is in the feed link and the audio link's query.", "query"),
+    ("Path token (Supercast / Substack style)", "The token is a folder in the feed and audio links.", "path"),
+    ("GUID is the link", "The episode GUID is the tokenized audio link.", "guid"),
+]
+
+
+def feed_links(case):
+    if case == "public":
+        url = f"{BASE}/feeds/public/show.rss"
+        return [("Anyone", url)]
+    links = []
+    for name, token in SUBSCRIBERS.items():
+        label = f"Subscriber {name.upper()}"
+        if case == "query":
+            links.append((label, f"{BASE}/feeds/subscriber-{name}/query-token.rss?auth={token}"))
+        elif case == "path":
+            links.append((label, f"{BASE}/feeds/{token}/path-token.rss"))
+        else:
+            links.append((label, f"{BASE}/feeds/{token}/guid-is-link.rss"))
+    return links
+
+
+def index_html():
+    sections = []
+    for title, note, case in INDEX_CASES:
+        rows = "".join(
+            f'''<li><span class="who">{escape(who)}</span>
+<code>{escape(url)}</code>
+<button type="button" data-url={quoteattr(url)}>Copy</button></li>'''
+            for who, url in feed_links(case))
+        sections.append(f"<section><h2>{escape(title)}</h2><p>{escape(note)}</p><ul>{rows}</ul></section>")
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test Feeds</title>
+<style>
+:root {{ --bg:#fbfaf6; --fg:#1d1d1b; --muted:#5b5b57; --card:#ffffff; --line:#dedbd2; --accent:#0a5fa8; --accent-fg:#ffffff; --done:#b85c00; }}
+@media (prefers-color-scheme: dark) {{ :root {{ --bg:#161614; --fg:#f1efe8; --muted:#b3b0a6; --card:#22221f; --line:#3a3934; --accent:#5aa9e6; --accent-fg:#0b1b29; --done:#f0a04b; }} }}
+body {{ margin:0; background:var(--bg); color:var(--fg); font:17px/1.45 -apple-system, system-ui, sans-serif; }}
+main {{ max-width:720px; margin:0 auto; padding:24px 16px 48px; }}
+h1 {{ font-size:1.6rem; margin:0 0 8px; }}
+h2 {{ font-size:1.15rem; margin:0 0 4px; }}
+p {{ margin:0 0 12px; color:var(--muted); }}
+section {{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin:16px 0; }}
+ul {{ list-style:none; margin:0; padding:0; }}
+li {{ display:grid; grid-template-columns:1fr auto; gap:6px 12px; padding:10px 0; border-top:1px solid var(--line); align-items:center; }}
+li:first-child {{ border-top:0; }}
+.who {{ grid-column:1 / -1; font-weight:600; }}
+code {{ font:13px/1.35 ui-monospace, Menlo, monospace; overflow-wrap:anywhere; color:var(--muted); }}
+button {{ font:inherit; font-weight:600; min-width:88px; min-height:44px; border:0; border-radius:10px; background:var(--accent); color:var(--accent-fg); }}
+button.copied {{ background:var(--done); }}
+</style>
+</head>
+<body>
+<main>
+<h1>Spoken Margins test feeds</h1>
+<p>Fake &ldquo;paid&rdquo; podcast feeds for testing link privacy. <strong>Every token is made up</strong> and starts with FAKEsub. Tap Copy, then use Paste in the app&rsquo;s Link or Podcast screen.</p>
+<p>After sharing a Margin from a private feed, the packet should contain no FAKEsub text. Each feed holds one short episode.</p>
+{"".join(sections)}
+<p>Source and notes: <a href="https://github.com/uncomposed/spoken-margins-test-feeds">github.com/uncomposed/spoken-margins-test-feeds</a></p>
+</main>
+<script>
+document.querySelectorAll("button[data-url]").forEach(function (b) {{
+  b.addEventListener("click", function () {{
+    var done = function () {{ b.textContent = "Copied \u2713"; b.classList.add("copied");
+      setTimeout(function () {{ b.textContent = "Copy"; b.classList.remove("copied"); }}, 2000); }};
+    if (navigator.clipboard) {{ navigator.clipboard.writeText(b.dataset.url).then(done, function () {{ b.textContent = "Long-press the link"; }}); }}
+    else {{ b.textContent = "Long-press the link"; }}
+  }});
+}});
+</script>
+</body>
+</html>
+'''
 
 
 if __name__ == "__main__":
