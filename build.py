@@ -173,7 +173,7 @@ def index_html():
     for title, note, case in INDEX_CASES:
         rows = "".join(
             f'''<li><span class="who">{escape(who)}</span>
-<code>{escape(url)}</code>
+<a href={quoteattr(url)}><code>{escape(url)}</code></a>
 <button type="button" data-url={quoteattr(url)}>Copy</button></li>'''
             for who, url in feed_links(case))
         sections.append(f"<section><h2>{escape(title)}</h2><p>{escape(note)}</p><ul>{rows}</ul></section>")
@@ -197,6 +197,7 @@ li {{ display:grid; grid-template-columns:1fr auto; gap:6px 12px; padding:10px 0
 li:first-child {{ border-top:0; }}
 .who {{ grid-column:1 / -1; font-weight:600; }}
 code {{ font:13px/1.35 ui-monospace, Menlo, monospace; overflow-wrap:anywhere; color:var(--muted); }}
+li a {{ color:inherit; text-decoration-color:var(--line); }}
 button {{ font:inherit; font-weight:600; min-width:88px; min-height:44px; border:0; border-radius:10px; background:var(--accent); color:var(--accent-fg); }}
 button.copied {{ background:var(--done); }}
 </style>
@@ -204,8 +205,9 @@ button.copied {{ background:var(--done); }}
 <body>
 <main>
 <h1>Spoken Margins test feeds</h1>
-<p>Fake &ldquo;paid&rdquo; podcast feeds for testing link privacy. <strong>Every token is made up</strong> and starts with FAKEsub. Tap Copy, then use Paste in the app&rsquo;s Link or Podcast screen.</p>
-<p>After sharing a Margin from a private feed, the packet should contain no FAKEsub text. Each feed holds one short episode.</p>
+<p>Fake &ldquo;paid&rdquo; podcast feeds for testing link privacy. <strong>Every token is made up.</strong></p>
+<p>Tap Copy next to a feed (or long-press its link and choose Copy Link), then in the app use Library &rarr; + &rarr; Link or Podcast &rarr; Paste. Copy a feed link, not this page&rsquo;s address: the page itself imports as an article.</p>
+<p>After sharing a Margin from a private feed, the packet should not contain the subscriber tokens, which begin FAKEsubA or FAKEsubB. Each feed holds one short episode.</p>
 {"".join(sections)}
 <p>Source and notes: <a href="https://github.com/uncomposed/spoken-margins-test-feeds">github.com/uncomposed/spoken-margins-test-feeds</a></p>
 </main>

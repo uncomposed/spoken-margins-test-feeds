@@ -18,6 +18,7 @@ li { display:grid; grid-template-columns:1fr auto; gap:6px 12px; padding:10px 0;
 li:first-child { border-top:0; }
 .who { grid-column:1 / -1; font-weight:600; }
 code { font:13px/1.35 ui-monospace, Menlo, monospace; overflow-wrap:anywhere; color:var(--muted); }
+li a { color:inherit; text-decoration-color:var(--line); }
 button { font:inherit; font-weight:600; min-width:88px; min-height:44px; border:0; border-radius:10px; background:var(--accent); color:var(--accent-fg); }
 button.copied { background:var(--done); }
 </style>
@@ -25,22 +26,23 @@ button.copied { background:var(--done); }
 <body>
 <main>
 <h1>Spoken Margins test feeds</h1>
-<p>Fake &ldquo;paid&rdquo; podcast feeds for testing link privacy. <strong>Every token is made up</strong> and starts with FAKEsub. Tap Copy, then use Paste in the app&rsquo;s Link or Podcast screen.</p>
-<p>After sharing a Margin from a private feed, the packet should contain no FAKEsub text. Each feed holds one short episode.</p>
+<p>Fake &ldquo;paid&rdquo; podcast feeds for testing link privacy. <strong>Every token is made up.</strong></p>
+<p>Tap Copy next to a feed (or long-press its link and choose Copy Link), then in the app use Library &rarr; + &rarr; Link or Podcast &rarr; Paste. Copy a feed link, not this page&rsquo;s address: the page itself imports as an article.</p>
+<p>After sharing a Margin from a private feed, the packet should not contain the subscriber tokens, which begin FAKEsubA or FAKEsubB. Each feed holds one short episode.</p>
 <section><h2>Public control</h2><p>A normal public feed. Its links should survive sharing.</p><ul><li><span class="who">Anyone</span>
-<code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/public/show.rss</code>
+<a href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/public/show.rss"><code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/public/show.rss</code></a>
 <button type="button" data-url="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/public/show.rss">Copy</button></li></ul></section><section><h2>Query token (Patreon style)</h2><p>The token is in the feed link and the audio link's query.</p><ul><li><span class="who">Subscriber A</span>
-<code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-a/query-token.rss?auth=FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7</code>
+<a href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-a/query-token.rss?auth=FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7"><code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-a/query-token.rss?auth=FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7</code></a>
 <button type="button" data-url="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-a/query-token.rss?auth=FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7">Copy</button></li><li><span class="who">Subscriber B</span>
-<code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-b/query-token.rss?auth=FAKEsubB1e2d3c4b5a69788776655443322110ff</code>
+<a href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-b/query-token.rss?auth=FAKEsubB1e2d3c4b5a69788776655443322110ff"><code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-b/query-token.rss?auth=FAKEsubB1e2d3c4b5a69788776655443322110ff</code></a>
 <button type="button" data-url="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-b/query-token.rss?auth=FAKEsubB1e2d3c4b5a69788776655443322110ff">Copy</button></li></ul></section><section><h2>Path token (Supercast / Substack style)</h2><p>The token is a folder in the feed and audio links.</p><ul><li><span class="who">Subscriber A</span>
-<code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/path-token.rss</code>
+<a href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/path-token.rss"><code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/path-token.rss</code></a>
 <button type="button" data-url="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/path-token.rss">Copy</button></li><li><span class="who">Subscriber B</span>
-<code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/path-token.rss</code>
+<a href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/path-token.rss"><code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/path-token.rss</code></a>
 <button type="button" data-url="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/path-token.rss">Copy</button></li></ul></section><section><h2>GUID is the link</h2><p>The episode GUID is the tokenized audio link.</p><ul><li><span class="who">Subscriber A</span>
-<code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/guid-is-link.rss</code>
+<a href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/guid-is-link.rss"><code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/guid-is-link.rss</code></a>
 <button type="button" data-url="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/guid-is-link.rss">Copy</button></li><li><span class="who">Subscriber B</span>
-<code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/guid-is-link.rss</code>
+<a href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/guid-is-link.rss"><code>https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/guid-is-link.rss</code></a>
 <button type="button" data-url="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubB1e2d3c4b5a69788776655443322110ff/guid-is-link.rss">Copy</button></li></ul></section>
 <p>Source and notes: <a href="https://github.com/uncomposed/spoken-margins-test-feeds">github.com/uncomposed/spoken-margins-test-feeds</a></p>
 </main>

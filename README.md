@@ -22,10 +22,10 @@ Subscribers A and B see the same episodes with the same GUIDs (except the GUID-i
 A `.spokenmargins` packet is a zip file. After sharing from one of the private feeds:
 
 ```bash
-unzip -p shared.spokenmargins | grep -c FAKEsub
+unzip -p shared.spokenmargins | LC_ALL=C grep -a -c -E 'FAKEsub[AB]'
 ```
 
-A count of 0 means no token left the device.
+A count of 0 means no token left the device. Search for `FAKEsubA` or `FAKEsubB`, not the bare word, because Margin context quoted from this page can contain the word itself.
 
 ## What this does not show
 
