@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spoken Margins Test Show (subscriber B)</title>
+    <link>https://uncomposed.github.io/spoken-margins-test-feeds/</link>
+    <atom:link href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/subscriber-b/query-token.rss?auth=FAKEsubB1e2d3c4b5a69788776655443322110ff" rel="self" type="application/rss+xml"/>
+    <description>Test fixture for Spoken Margins. All tokens are fake.</description>
+    <language>en-us</language>
+    <itunes:author>Spoken Margins</itunes:author>
+    <item>
+      <title>Episode 1: Why links leak</title>
+      <guid isPermaLink="false">smtf-ep1</guid>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 GMT</pubDate>
+      <enclosure url="https://uncomposed.github.io/spoken-margins-test-feeds/audio/ep1.m4a?token-time=1790000000&amp;token-hash=FAKEsubB1e2d3c4b5a69788776655443322110ff" length="313186" type="audio/mp4"/>
+      <itunes:duration>68</itunes:duration>
+      <description>Test episode. The subscriber token in this feed is fake.</description>
+    </item>
+  </channel>
+</rss>

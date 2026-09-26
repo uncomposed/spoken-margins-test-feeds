@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spoken Margins Test Show (subscriber A)</title>
+    <link>https://uncomposed.github.io/spoken-margins-test-feeds/</link>
+    <atom:link href="https://uncomposed.github.io/spoken-margins-test-feeds/feeds/FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7/guid-is-link.rss" rel="self" type="application/rss+xml"/>
+    <description>Test fixture for Spoken Margins. All tokens are fake.</description>
+    <language>en-us</language>
+    <itunes:author>Spoken Margins</itunes:author>
+    <item>
+      <title>Episode 3: When the GUID is the link</title>
+      <guid isPermaLink="true">https://uncomposed.github.io/spoken-margins-test-feeds/audio/ep3.m4a?token=FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7</guid>
+      <pubDate>Fri, 04 Sep 2026 00:00:00 GMT</pubDate>
+      <enclosure url="https://uncomposed.github.io/spoken-margins-test-feeds/audio/ep3.m4a?token=FAKEsubA7f3a9c2e41b8d6a5c4b3e2f1a0d9c8b7" length="194292" type="audio/mp4"/>
+      <itunes:duration>39</itunes:duration>
+      <description>Test episode. The subscriber token in this feed is fake.</description>
+    </item>
+  </channel>
+</rss>
